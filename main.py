@@ -6,7 +6,7 @@ import os
 
 app = FastAPI()
 
-# Replace with your actual MongoDB connection string
+
 mongo_uri = "mongodb+srv://saqib:saqib1234@cluster0.rppmgkb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 client = MongoClient(mongo_uri)
 db = client['user_database']
@@ -16,6 +16,10 @@ class RegisterRequest(BaseModel):
     identifier: str
     password: str
 
+@app.get("/")
+async def root():
+    return {"message": "API is working"}
+    
 @app.post("/register")
 async def register(data: RegisterRequest):
     identifier = data.identifier
